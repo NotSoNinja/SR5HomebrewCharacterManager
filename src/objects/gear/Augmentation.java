@@ -11,7 +11,23 @@ public class Augmentation extends Gear {
 		essenc = essence;
 		//TODO Something to hold mods
 	}
-	
-	//TODO Getters and setters
+
+	public int getCap() {
+		return cap;
+	}
+
+	public void setCap(int cap) {
+		this.cap = cap;
+	}
+
+	public float getEssenc() {
+		return essenc;
+	}
+
+	public void setEssenc(float essenc) {
+		this.essenc = essenc;
+	}
+
+
 
 }

@@ -7,7 +7,7 @@ public class Contact extends Character {
 	
 
 	public Contact(String namestr, int conn, int loylty, String description) {
-		super("System", 0);
+		super("System", 0, 0);
 		name = namestr;
 		connection = conn;
 		loyalty =loylty;
