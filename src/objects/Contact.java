@@ -7,7 +7,6 @@ public class Contact extends Character {
 	
 
 	public Contact(String namestr, int conn, int loylty, String description) {
-		// TODO Auto-generated constructor stub
 		super("System", 0);
 		name = namestr;
 		connection = conn;

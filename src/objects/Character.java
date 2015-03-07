@@ -1,7 +1,6 @@
 package objects;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import objects.gear.Augmentation;
 import objects.gear.Gear;
