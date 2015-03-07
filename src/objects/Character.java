@@ -1,6 +1,14 @@
 package objects;
 
+import helpers.jsonSerializeable;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
 
 import objects.gear.Augmentation;
 import objects.gear.Gear;
@@ -9,7 +17,7 @@ import objects.gear.RangedWeapon;
 import enums.Lifestyle;
 import enums.Metatype;
 
-public class Character {
+public class Character implements jsonSerializeable {
 	//Personal Data
 	String name, ethnicity, sex, bio, player;
 	Metatype type;
@@ -17,62 +25,62 @@ public class Character {
 	int nuyen;
 	int age, streetCred, notariety, awareness, karma, totalKarma;
 	float height, weight; //in feet, lbs typically
-	
+
 	//Attributes
 	int bdy, agi, rea, str, wil, log, intu, cha, edge;
 	int edgePoints, essence, magres, initStd, initMat, initAst;
 	int composure, judgeIntentions, memory, lift, movement;
-	
+
 	//Limits
 	int physLimit, mentLimit, socLimit;
-	
+
 	//Skills
 	Skill skills[]; //71? slots (maybe 70)
-	
+
 	//Knowledges
 	protected ArrayList<KnowledgeSkill> knowledges;
-	
+
 	//ID's
 	protected ArrayList<Identity> ids;
-	
+
 	//Condition
 	int physDamage, stunDamage, overflow;
-	
+
 	//Qualities
 	protected ArrayList<Quality> qualities;
-	
+
 	//Contacts
 	protected ArrayList<Contact> contacts;
-	
+
 	//Ranged Weapons
 	protected ArrayList<RangedWeapon> rangedWeapons;
-	
+
 	//Melee Weapons
 	protected ArrayList<MeleeWeapon> meleeWeapons;
-	
+
 	//Armor
 	protected ArrayList<Gear> armorList;
-	
+
 	//Augmentations
 	protected ArrayList<Augmentation> Augs;
-	
+
 	//Gear
 	protected ArrayList<Gear> gearList;
-	
+
 	//Rig/Deck
 	protected ArrayList<Gear> commlinks;
-	
+
 	//Vehicle
 	protected ArrayList<Vehicle> vehicles;
-	
+
 	//Spells, etc.
 	//TODO ArrayList of MagicObject
 	//TODO find someone who wants to implement this
-	
+
 	//Adept Powers
 	//TODO ArrayList of Ability objects
 	//TODO find someone who wants to implement this
-	
+
 	public Character(String namestr, int startkarma, int startessence){
 		//TODO An actual constructor
 		player = namestr;
@@ -682,5 +690,31 @@ public class Character {
 	public void setOverflow(int overflow) {
 		this.overflow = overflow;
 	}
-	
+
+	//should do for a simple test
+	@Override
+	public String toJSON() {
+		String ret = "";
+		Gson converter = new Gson();
+		ret = converter.toJson(this.toString());
+		return ret;
+	}
+	/**
+	 * Writes a string to a file
+	 * @param json the string
+	 * @param fi the file
+	 * @return
+	 */
+	public boolean writeCharacterToFile(String json, File fi) {
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(fi));
+			out.write(json, 0, json.length());
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return true;
+		}
+		return false;
+	}
+
 }
