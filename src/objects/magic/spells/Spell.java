@@ -5,12 +5,12 @@ import enums.magic.spells.SpellRange;
 import enums.magic.spells.SpellType;
 
 public abstract class Spell {
-	String name, description;
-	SpellType type;
-	SpellRange range;
-	SpellDuration duration;
-	boolean isArea;
-	int drainModifier; //The amount of drain added to the force value. Usually negative.
+	protected String name, description;
+	protected SpellType type;
+	protected SpellRange range;
+	protected SpellDuration duration;
+	protected boolean isArea;
+	protected int drainModifier; //The amount of drain added to the force value. Usually negative.
 	
 	/**
 	 * Computes the amount of drain a spell creates. 
