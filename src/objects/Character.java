@@ -30,40 +30,40 @@ public class Character {
 	Skill skills[]; //71? slots (maybe 70)
 	
 	//Knowledges
-	ArrayList<KnowledgeSkill> knowledges;
+	protected ArrayList<KnowledgeSkill> knowledges;
 	
 	//ID's
-	ArrayList<Identity> ids;
+	protected ArrayList<Identity> ids;
 	
 	//Condition
 	int physDamage, stunDamage, overflow;
 	
 	//Qualities
-	ArrayList<Quality> qualities;
+	protected ArrayList<Quality> qualities;
 	
 	//Contacts
-	ArrayList<Contact> contacts;
+	protected ArrayList<Contact> contacts;
 	
 	//Ranged Weapons
-	ArrayList<RangedWeapon> rangedWeapons;
+	protected ArrayList<RangedWeapon> rangedWeapons;
 	
 	//Melee Weapons
-	ArrayList<MeleeWeapon> meleeWeapons;
+	protected ArrayList<MeleeWeapon> meleeWeapons;
 	
 	//Armor
-	ArrayList<Gear> armorList;
+	protected ArrayList<Gear> armorList;
 	
 	//Augmentations
-	ArrayList<Augmentation> Augs;
+	protected ArrayList<Augmentation> Augs;
 	
 	//Gear
-	ArrayList<Gear> gearList;
+	protected ArrayList<Gear> gearList;
 	
 	//Rig/Deck
-	ArrayList<Gear> commlinks;
+	protected ArrayList<Gear> commlinks;
 	
 	//Vehicle
-	ArrayList<Vehicle> vehicles;
+	protected ArrayList<Vehicle> vehicles;
 	
 	//Spells, etc.
 	//TODO ArrayList of MagicObject
@@ -73,10 +73,12 @@ public class Character {
 	//TODO ArrayList of Ability objects
 	//TODO find someone who wants to implement this
 	
-	public Character(String namestr, int startkarma){
+	public Character(String namestr, int startkarma, int startessence){
 		//TODO An actual constructor
 		player = namestr;
-		karma = totalKarma = startkarma;
+		karma = totalKarma = startkarma; //default starting value is 25
+		essence = startessence; //Default starting value is 6
+		//TODO Skill array initializer
 	}
 
 	/**
@@ -332,7 +334,7 @@ public class Character {
 	}
 
 	/**
-	 * @return the rea
+	 * @return the reaction
 	 */
 	public int getRea() {
 		return rea;

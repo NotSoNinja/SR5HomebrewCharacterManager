@@ -4,6 +4,17 @@ public class Contact extends Character {
 	int connection, loyalty, favor;
 	String desc;
 	
+	
+
+	public Contact(String namestr, int conn, int loylty, String description) {
+		super("System", 0, 0);
+		name = namestr;
+		connection = conn;
+		loyalty =loylty;
+		favor = 0;
+		desc = description;
+	}
+	
 	/**
 	 * @return the connection
 	 */
@@ -59,17 +70,5 @@ public class Contact extends Character {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-
-	public Contact(String namestr, int conn, int loylty, String description) {
-		// TODO Auto-generated constructor stub
-		super("System", 0);
-		name = namestr;
-		connection = conn;
-		loyalty =loylty;
-		favor = 0;
-		desc = description;
-	}
-
-	//TODO getters and setters
 	
 }

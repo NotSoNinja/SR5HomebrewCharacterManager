@@ -23,9 +23,166 @@ public class Vehicle {
 		body = attribs[5];
 		armor = attribs[6];
 		sensor = attribs[7];
+		avail = availability;
 		restricted = r;
 		forbidden = f;
 		desc = description;
+	}
+	/**
+	 * @return the handling
+	 */
+	public int getHandling() {
+		return handling;
+	}
+	/**
+	 * @param handling the handling to set
+	 */
+	public void setHandling(int handling) {
+		this.handling = handling;
+	}
+	/**
+	 * @return the accel
+	 */
+	public int getAccel() {
+		return accel;
+	}
+	/**
+	 * @param accel the accel to set
+	 */
+	public void setAccel(int accel) {
+		this.accel = accel;
+	}
+	/**
+	 * @return the spd
+	 */
+	public int getSpd() {
+		return spd;
+	}
+	/**
+	 * @param spd the spd to set
+	 */
+	public void setSpd(int spd) {
+		this.spd = spd;
+	}
+	/**
+	 * @return the pilot
+	 */
+	public int getPilot() {
+		return pilot;
+	}
+	/**
+	 * @param pilot the pilot to set
+	 */
+	public void setPilot(int pilot) {
+		this.pilot = pilot;
+	}
+	/**
+	 * @return the body
+	 */
+	public int getBody() {
+		return body;
+	}
+	/**
+	 * @param body the body to set
+	 */
+	public void setBody(int body) {
+		this.body = body;
+	}
+	/**
+	 * @return the armor
+	 */
+	public int getArmor() {
+		return armor;
+	}
+	/**
+	 * @param armor the armor to set
+	 */
+	public void setArmor(int armor) {
+		this.armor = armor;
+	}
+	/**
+	 * @return the sensor
+	 */
+	public int getSensor() {
+		return sensor;
+	}
+	/**
+	 * @param sensor the sensor to set
+	 */
+	public void setSensor(int sensor) {
+		this.sensor = sensor;
+	}
+	/**
+	 * @return the avail
+	 */
+	public int getAvail() {
+		return avail;
+	}
+	/**
+	 * @param avail the avail to set
+	 */
+	public void setAvail(int avail) {
+		this.avail = avail;
+	}
+	/**
+	 * @return the price
+	 */
+	public int getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	/**
+	 * @return the restricted
+	 */
+	public boolean isRestricted() {
+		return restricted;
+	}
+	/**
+	 * @param restricted the restricted to set
+	 */
+	public void setRestricted(boolean restricted) {
+		this.restricted = restricted;
+	}
+	/**
+	 * @return the forbidden
+	 */
+	public boolean isForbidden() {
+		return forbidden;
+	}
+	/**
+	 * @param forbidden the forbidden to set
+	 */
+	public void setForbidden(boolean forbidden) {
+		this.forbidden = forbidden;
+	}
+	/**
+	 * @return the nam
+	 */
+	public String getNam() {
+		return nam;
+	}
+	/**
+	 * @param nam the nam to set
+	 */
+	public void setNam(String nam) {
+		this.nam = nam;
+	}
+	/**
+	 * @return the desc
+	 */
+	public String getDesc() {
+		return desc;
+	}
+	/**
+	 * @param desc the desc to set
+	 */
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	
 	//TODO getters and setters
