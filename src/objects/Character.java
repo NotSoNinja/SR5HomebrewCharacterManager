@@ -332,7 +332,7 @@ public class Character {
 	}
 
 	/**
-	 * @return the rea
+	 * @return the reaction
 	 */
 	public int getRea() {
 		return rea;
