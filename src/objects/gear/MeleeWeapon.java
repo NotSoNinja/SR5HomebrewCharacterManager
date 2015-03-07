@@ -1,7 +1,5 @@
 package objects.gear;
 
-import enums.FireMode;
-
 public class MeleeWeapon extends Gear {
 	int acc, rea, dam, ap;
 
