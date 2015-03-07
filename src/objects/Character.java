@@ -696,7 +696,11 @@ public class Character implements jsonSerializeable {
 	public String toJSON() {
 		String ret = "";
 		Gson converter = new Gson();
-		ret = converter.toJson(this.toString());
+		//convert an arraylist to json
+		//to array
+		//array to json
+		//test
+		ret = converter.toJson(this); //TODO make this more legit
 		return ret;
 	}
 	/**
