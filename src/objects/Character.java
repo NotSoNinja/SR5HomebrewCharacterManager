@@ -63,10 +63,11 @@ public class Character {
 	ArrayList<Gear> commlinks;
 	
 	//Vehicle
-	//TODO ArrayList of Vehicle
+	ArrayList<Vehicle> vehicles;
 	
 	//Spells, etc.
 	//TODO ArrayList of MagicObject
+	//TODO find someone who wants to implement this
 	
 	//Adept Powers
 	//TODO ArrayList of Ability objects
