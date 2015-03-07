@@ -73,10 +73,11 @@ public class Character {
 	//TODO ArrayList of Ability objects
 	//TODO find someone who wants to implement this
 	
-	public Character(String namestr, int startkarma){
+	public Character(String namestr, int startkarma, int startessence){
 		//TODO An actual constructor
 		player = namestr;
-		karma = totalKarma = startkarma;
+		karma = totalKarma = startkarma; //default starting value is 25
+		essence = startessence; //Default starting value is 6
 		//TODO Skill array initializer
 	}
 
