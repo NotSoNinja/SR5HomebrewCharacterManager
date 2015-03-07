@@ -55,13 +55,13 @@ public class Vehicle {
 	/**
 	 * @return the spd
 	 */
-	public int getSpd() {
+	public int getSpeed() {
 		return spd;
 	}
 	/**
 	 * @param spd the spd to set
 	 */
-	public void setSpd(int spd) {
+	public void setSpeed(int spd) {
 		this.spd = spd;
 	}
 	/**
@@ -161,25 +161,25 @@ public class Vehicle {
 		this.forbidden = forbidden;
 	}
 	/**
-	 * @return the nam
+	 * @return the name
 	 */
-	public String getNam() {
+	public String getName() {
 		return nam;
 	}
 	/**
-	 * @param nam the nam to set
+	 * @param nam the name to set
 	 */
-	public void setNam(String nam) {
-		this.nam = nam;
+	public void setName(String name) {
+		this.nam = name;
 	}
 	/**
-	 * @return the desc
+	 * @return the description
 	 */
 	public String getDesc() {
 		return desc;
 	}
 	/**
-	 * @param desc the desc to set
+	 * @param desc the description to set
 	 */
 	public void setDesc(String desc) {
 		this.desc = desc;
