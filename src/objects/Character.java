@@ -7,7 +7,9 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 
+import objects.gear.Armor;
 import objects.gear.Augmentation;
+import objects.gear.Cyberdeck;
 import objects.gear.Gear;
 import objects.gear.MeleeWeapon;
 import objects.gear.RangedWeapon;
@@ -59,7 +61,7 @@ public class Character {
 	protected MeleeWeapon meleeWeapons[];
 
 	//Armor
-	protected Gear armorList[];
+	protected Armor armorList[];
 
 	//Augmentations
 	protected Augmentation augs[];
@@ -68,17 +70,17 @@ public class Character {
 	protected Gear gearList[];
 
 	//Rig/Deck
-	protected Gear commlinks[];
+	protected Cyberdeck commlinks[];//TODO add comm, deck, rig
 
 	//Vehicle
 	protected Vehicle vehicles[];
 
 	//Spells, etc.
-	//TODO ArrayList of MagicObject
+	//TODO Array of MagicObject
 	//TODO find someone who wants to implement this
 
 	//Adept Powers
-	//TODO ArrayList of Ability objects
+	//TODO Array of Ability objects
 	//TODO find someone who wants to implement this
 
 	public Character(String namestr, int startkarma, int startessence, int arrayLength){
@@ -94,12 +96,34 @@ public class Character {
 		contacts = new Contact[arrayLength];
 		rangedWeapons = new RangedWeapon[arrayLength];
 		meleeWeapons = new MeleeWeapon[arrayLength];
-		armorList = new Gear[arrayLength];
+		armorList = new Armor[arrayLength];
 		augs = new Augmentation[arrayLength];
 		gearList = new Gear[arrayLength];
-		commlinks = new Gear[arrayLength];
+		commlinks = new Cyberdeck[arrayLength];
 		vehicles = new Vehicle[arrayLength];
 		saveLoc = null;
+	}
+	
+	public Character(String namestr, int startkarma, int startessence, int arrayLength, String charName){
+		//TODO An actual constructor
+		player = namestr;
+		karma = totalKarma = startkarma; //default starting value is 25
+		essence = startessence; //Default starting value is 6
+		//TODO Skill array initializer
+		skills = new Skill[arrayLength];
+		knowledges = new KnowledgeSkill[arrayLength];
+		ids = new Identity[arrayLength];
+		qualities = new Quality[arrayLength];
+		contacts = new Contact[arrayLength];
+		rangedWeapons = new RangedWeapon[arrayLength];
+		meleeWeapons = new MeleeWeapon[arrayLength];
+		armorList = new Armor[arrayLength];
+		augs = new Augmentation[arrayLength];
+		gearList = new Gear[arrayLength];
+		commlinks = new Cyberdeck[arrayLength];
+		vehicles = new Vehicle[arrayLength];
+		name = charName;
+		saveLoc = new File(charName + ".json");
 	}
 
 	/**
@@ -715,7 +739,8 @@ public class Character {
 	 */
 	public boolean writeCharacterToFile(File fi) {
 		if(fi == null){
-			fi = new File("UnnamedCharacter.json");
+			saveLoc = new File("UnnamedCharacter.json");
+			fi = saveLoc;
 		}
 		Gson converter = new Gson();
 		String json = converter.toJson(this);
