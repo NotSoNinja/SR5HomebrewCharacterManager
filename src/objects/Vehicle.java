@@ -24,6 +24,7 @@ public class Vehicle {
 		armor = attribs[5];
 		sensor = attribs[6];
 		avail = availability;
+		price = cost;
 		restricted = r;
 		forbidden = f;
 		desc = description;
