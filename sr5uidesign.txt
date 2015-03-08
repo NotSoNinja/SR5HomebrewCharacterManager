@@ -1,0 +1,28 @@
+Design Document for SR5HomebrewCharacterManager User Interface
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The goal of this UI is to provide a simple, scalable, and intuitive platform through which the user can interact with the program.
+
+I. Startup
+The UI should display a splash screen, with a dialog box that asks the user which reasource files they wish to load.
+The UI should be able to send instructions to load these files, and have a simple "Load All" option.
+
+II. Asset Creation
+The UI should provide a toolset for creating characters and other assets.
+The UI should prompt the user for which archive file to use when creating assets, have the option to create a new archive, and 
+have the capibility to switch the active archive at any time.
+There should be intuitive aides for character creation, along the lines of those found in Shadowrun, 5th ed.
+The user should be guided along a path to character creation, but able to skip around if they like.
+Adding and removing items/qualities/gear from the character should cause relevant stats to update.
+
+III. Character Management
+There should be a graphical character sheet that displays relevant information to the user.
+There should be automated attack, skill, etc. checks available via buttons near the appropriate skill/weapon.
+The user should be easily able to add misc. modifiers to these checks.
+A damage chart should be available.
+Adding/removing items, gear, etc. should work as in character creation.
+Adding karma, money, etc. should be simple and intuitive.
+
+IV. Asthetic
+The UI should be able to display stored images, but not in such a way that unnecessarily clutters the UI.
+The UI shouldn't look like butts.
