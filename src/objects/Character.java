@@ -1,12 +1,9 @@
 package objects;
 
-import helpers.jsonSerializeable;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
@@ -17,7 +14,10 @@ import objects.gear.RangedWeapon;
 import enums.Lifestyle;
 import enums.Metatype;
 
-public class Character implements jsonSerializeable {
+public class Character {
+	//Non-shadowrun variables
+	File saveLoc;
+	
 	//Personal Data
 	String name, ethnicity, sex, bio, player;
 	Metatype type;
@@ -38,40 +38,40 @@ public class Character implements jsonSerializeable {
 	Skill skills[]; //71? slots (maybe 70)
 
 	//Knowledges
-	protected ArrayList<KnowledgeSkill> knowledges;
+	protected KnowledgeSkill knowledges[];
 
 	//ID's
-	protected ArrayList<Identity> ids;
+	protected Identity ids[];
 
 	//Condition
 	int physDamage, stunDamage, overflow;
 
 	//Qualities
-	protected ArrayList<Quality> qualities;
+	protected Quality qualities[];
 
 	//Contacts
-	protected ArrayList<Contact> contacts;
+	protected Contact contacts[];
 
 	//Ranged Weapons
-	protected ArrayList<RangedWeapon> rangedWeapons;
+	protected RangedWeapon rangedWeapons[];
 
 	//Melee Weapons
-	protected ArrayList<MeleeWeapon> meleeWeapons;
+	protected MeleeWeapon meleeWeapons[];
 
 	//Armor
-	protected ArrayList<Gear> armorList;
+	protected Gear armorList[];
 
 	//Augmentations
-	protected ArrayList<Augmentation> Augs;
+	protected Augmentation augs[];
 
 	//Gear
-	protected ArrayList<Gear> gearList;
+	protected Gear gearList[];
 
 	//Rig/Deck
-	protected ArrayList<Gear> commlinks;
+	protected Gear commlinks[];
 
 	//Vehicle
-	protected ArrayList<Vehicle> vehicles;
+	protected Vehicle vehicles[];
 
 	//Spells, etc.
 	//TODO ArrayList of MagicObject
@@ -81,12 +81,25 @@ public class Character implements jsonSerializeable {
 	//TODO ArrayList of Ability objects
 	//TODO find someone who wants to implement this
 
-	public Character(String namestr, int startkarma, int startessence){
+	public Character(String namestr, int startkarma, int startessence, int arrayLength){
 		//TODO An actual constructor
 		player = namestr;
 		karma = totalKarma = startkarma; //default starting value is 25
 		essence = startessence; //Default starting value is 6
 		//TODO Skill array initializer
+		skills = new Skill[arrayLength];
+		knowledges = new KnowledgeSkill[arrayLength];
+		ids = new Identity[arrayLength];
+		qualities = new Quality[arrayLength];
+		contacts = new Contact[arrayLength];
+		rangedWeapons = new RangedWeapon[arrayLength];
+		meleeWeapons = new MeleeWeapon[arrayLength];
+		armorList = new Gear[arrayLength];
+		augs = new Augmentation[arrayLength];
+		gearList = new Gear[arrayLength];
+		commlinks = new Gear[arrayLength];
+		vehicles = new Vehicle[arrayLength];
+		saveLoc = null;
 	}
 
 	/**
@@ -99,8 +112,11 @@ public class Character implements jsonSerializeable {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName(String name, File overrideSaveLocation) {
 		this.name = name;
+		if(overrideSaveLocation == null){
+			saveLoc = new File(name + ".json");
+		}
 	}
 
 	/**
@@ -691,25 +707,18 @@ public class Character implements jsonSerializeable {
 		this.overflow = overflow;
 	}
 
-	//should do for a simple test
-	@Override
-	public String toJSON() {
-		String ret = "";
-		Gson converter = new Gson();
-		//convert an arraylist to json
-		//to array
-		//array to json
-		//test
-		ret = converter.toJson(this); //TODO make this more legit
-		return ret;
-	}
 	/**
 	 * Writes a string to a file
 	 * @param json the string
 	 * @param fi the file
 	 * @return
 	 */
-	public boolean writeCharacterToFile(String json, File fi) {
+	public boolean writeCharacterToFile(File fi) {
+		if(fi == null){
+			fi = new File("UnnamedCharacter.json");
+		}
+		Gson converter = new Gson();
+		String json = converter.toJson(this);
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(fi));
 			out.write(json, 0, json.length());

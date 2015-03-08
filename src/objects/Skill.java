@@ -7,14 +7,15 @@ import enums.SkillGroup;
 public class Skill {
 	boolean def;
 	SkillGroup group;
-	ArrayList<String> specializations;
+	String specializations[];
 	String nme, desc;
-	int rating;
-	public Skill(String name, boolean defaul, SkillGroup grp, ArrayList<String>specs, String description){
+	int rating, length;
+	public Skill(String name, boolean defaul, SkillGroup grp, ArrayList<String>specs, String description, int arrayLength){
 		nme = name;
 		def = defaul;
 		group = grp;
-		specializations = specs;
+		specializations = new String[arrayLength];
+		length = arrayLength;
 		desc = description;
 		if(defaul){
 			rating = 2;
@@ -49,21 +50,21 @@ public class Skill {
 	/**
 	 * @return the specializations
 	 */
-	public ArrayList<String> getSpecializations() {
+	public String[] getSpecializations() {
 		return specializations;
 	}
 	/**
 	 * @param specializations the specializations to set
 	 */
-	public void addSpecializations(String specialization) {
-		this.specializations.add(specialization);
+	public void addSpecialization(String specialization) {
+		
 	}
 	/**
 	 * 
 	 * @see java.util.ArrayList#clear()
 	 */
 	public void clearSpecs() {
-		specializations.clear();
+		specializations = new String[length];
 	}
 	/**
 	 * @param o
@@ -71,7 +72,12 @@ public class Skill {
 	 * @see java.util.ArrayList#contains(java.lang.Object)
 	 */
 	public boolean specsContains(Object o) {
-		return specializations.contains(o);
+		for(int i = 0; i < specializations.length; i++){
+			if(specializations[i] == o){
+				return true;
+			}
+		}
+		return false;
 	}
 	/**
 	 * @param o
@@ -79,14 +85,22 @@ public class Skill {
 	 * @see java.util.ArrayList#indexOf(java.lang.Object)
 	 */
 	public int indexOfSpecialization(Object o) {
-		return specializations.indexOf(o);
+		for(int i = 0; i < specializations.length; i++){
+			if(specializations[i] == o){
+				return i;
+			}
+		}
+		return -1;
 	}
 	/**
 	 * @return
 	 * @see java.util.ArrayList#isEmpty()
 	 */
 	public boolean noSpecializations() {
-		return specializations.isEmpty();
+		if(specializations[0] == null){
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * @param index
@@ -94,7 +108,17 @@ public class Skill {
 	 * @see java.util.ArrayList#remove(int)
 	 */
 	public String removeSpecialization(int index) {
-		return specializations.remove(index);
+		String temp = specializations[index];
+		specializations[index] = null;
+		for(int i = index + 1; i < specializations.length; i++){
+			if(specializations[i] != null){
+				specializations[i - 1] = specializations[i];
+				specializations[i] = null;
+			}else{
+				break;
+			}
+		}
+		return temp;
 	}
 	/**
 	 * @param o
@@ -102,14 +126,30 @@ public class Skill {
 	 * @see java.util.ArrayList#remove(java.lang.Object)
 	 */
 	public boolean removeSpecialization(Object o) {
-		return specializations.remove(o);
+		String temp = null;
+		int index;
+		for(index = 0; index < specializations.length; index++){
+			if(specializations[index] == o){
+				temp = specializations[index];
+				break;
+			}
+		}
+		for(int i = index + 1; i < specializations.length; i++){
+			if(specializations[i] != null){
+				specializations[i - 1] = specializations[i];
+				specializations[i] = null;
+			}else{
+				break;
+			}
+		}
+		return temp != null;
 	}
 	/**
 	 * @return
 	 * @see java.util.ArrayList#size()
 	 */
 	public int sizeOfSpecializations() {
-		return specializations.size();
+		return specializations.length;
 	}
 	/**
 	 * @return the name

@@ -19,10 +19,10 @@ public class Vehicle {
 		handling = attribs[0];
 		accel = attribs[1];
 		spd = attribs[2];
-		pilot = attribs[4];
-		body = attribs[5];
-		armor = attribs[6];
-		sensor = attribs[7];
+		pilot = attribs[3];
+		body = attribs[4];
+		armor = attribs[5];
+		sensor = attribs[6];
 		avail = availability;
 		restricted = r;
 		forbidden = f;
