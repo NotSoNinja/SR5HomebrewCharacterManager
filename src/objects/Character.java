@@ -739,7 +739,7 @@ public class Character {
 	 */
 	public boolean writeCharacterToFile(File fi) {
 		if(fi == null){
-			saveLoc = new File("UnnamedCharacter.json");
+			saveLoc = new File("UnnamedCharacter.scf");
 			fi = saveLoc;
 		}
 		Gson converter = new Gson();

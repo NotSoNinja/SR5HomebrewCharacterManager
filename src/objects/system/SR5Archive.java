@@ -50,7 +50,7 @@ public class SR5Archive {
 	//TODO find someone who wants to implement this
 
 	public SR5Archive(String name, int size){
-		saveLoc = new File(name + ".sra");
+		saveLoc = new File(name + ".saf");
 		this.name = name;
 		this.size = size;
 		qualities = new Quality[size];
@@ -66,7 +66,7 @@ public class SR5Archive {
 	
 	public boolean writeArchiveToFile(File fi) {
 		if(fi == null){
-			saveLoc = new File("UnnamedArchive.json");
+			saveLoc = new File("UnnamedArchive.saf");
 			fi = saveLoc;
 		}
 		Gson converter = new Gson();
