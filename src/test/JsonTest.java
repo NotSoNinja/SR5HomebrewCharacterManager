@@ -26,7 +26,7 @@ public class JsonTest {
 		System.out.println(json);
 		System.out.println("JSON complete");
 		Vehicle clone = converter.fromJson(json, derp.getClass());
-		System.out.println(clone.getName());
+		System.out.println("If JSON works, this is Derpcycle: " + clone.getName());
 	}
 
 }
