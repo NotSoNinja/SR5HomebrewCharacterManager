@@ -9,11 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -21,7 +18,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -35,7 +31,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 
 public class Splash extends JFrame {
-
+	private static final long serialVersionUID = 9146073660186581722L;
 	private JPanel contentPane;
 
 	/**
