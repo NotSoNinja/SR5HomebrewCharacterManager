@@ -42,7 +42,6 @@ public class Splash extends JFrame {
 			public void run() {
 				try {
 					Splash frame = new Splash();
-					frame.setTitle("Shadowrun 5 Homebrew Character Manager");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,6 +55,7 @@ public class Splash extends JFrame {
 	 */
 	public Splash() {
 		/* Set up the window */
+		this.setTitle("Shadowrun 5 Homebrew Character Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 820, 600);
 		contentPane = new JPanel();
@@ -212,6 +212,14 @@ public class Splash extends JFrame {
 			}
 		});
 		panel.add(btnLaunch);
+		
+		/* Configure whether the buttons are enabled or not */
+		btnRemoveAll.setEnabled(false);
+		btnRemoveSelected.setEnabled(false);
+		if(input.isEmpty()){
+			btnAddAll.setEnabled(false);
+			btnAddSelected.setEnabled(false);
+		}
 	}
 
 }

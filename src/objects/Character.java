@@ -70,7 +70,7 @@ public class Character {
 	protected Gear gearList[];
 
 	//Rig/Deck
-	protected Cyberdeck commlinks[];//TODO add comm, deck, rig
+	protected Cyberdeck commlinks[];
 
 	//Vehicle
 	protected Vehicle vehicles[];
@@ -204,6 +204,27 @@ public class Character {
 	 */
 	public Metatype getType() {
 		return type;
+	}
+	
+	/**
+	 * @return the type
+	 */
+	public String getTypeString() {
+		switch(type){
+		case HUMAN :
+			return "Human";
+		case ELF :
+			return "Elf";
+		case DWARF :
+			return "Dwarf";
+		case ORK :
+			return "Ork";
+		case TROLL :
+			return "U MAD BRO?";
+		case OTHER :
+			return "Custon Race";
+		}
+		return "You should never see this.  Ever.";
 	}
 
 	/**

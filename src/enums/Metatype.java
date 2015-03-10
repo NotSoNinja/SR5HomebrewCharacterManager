@@ -1,5 +1,6 @@
 package enums;
 
 public enum Metatype {
-	HUMAN, ELF, DWARF, ORK, TROLL, OTHER
+	HUMAN, ELF, DWARF, ORK, TROLL, OTHER;
 }
+
