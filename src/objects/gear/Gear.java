@@ -1,9 +1,12 @@
 package objects.gear;
 
+import java.awt.image.BufferedImage;
+
 public class Gear {
 	String name, desc;
 	int grade, avail, cost;  //grade = rating
 	boolean restricted, forbidden;
+	BufferedImage picture;
 	
 	public Gear(String namestr, int rating, int availability, boolean r, boolean f, int price, String description){
 		name = namestr;
@@ -111,6 +114,20 @@ public class Gear {
 	 */
 	public void setForbidden(boolean forbidden) {
 		this.forbidden = forbidden;
+	}
+	
+	/**
+	 * @return the picture
+	 */
+	public BufferedImage getPicture(){
+		return picture;
+	}
+	
+	/**
+	 * @param picture the image to set
+	 */
+	public void setPicture(BufferedImage picture){
+		this.picture = picture;
 	}
 
 }

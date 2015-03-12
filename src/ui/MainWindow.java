@@ -3,43 +3,69 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JTabbedPane;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import objects.system.QuickStatPanel;
+import objects.system.SR5Archive;
+import objects.Character;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 6841497333789115515L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow frame = new MainWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	ArrayList<Character> characters;
+	ArrayList<SR5Archive> archives;
 
 	/**
 	 * Create the frame.
 	 */
-	public MainWindow() {
+	public MainWindow(ArrayList<File> files) {
+		/* Take care of the files */
+		characters = new ArrayList<Character>();
+		archives = new ArrayList<SR5Archive>();
+		Gson converter = new Gson();
+		String contents;
+		for(File f : files){
+			if(f.getName().endsWith(".saf")){
+				try {
+					contents = new Scanner(f).useDelimiter("\\Z").next();
+					archives.add(converter.fromJson(contents, new SR5Archive(null, 0).getClass()));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}else if(f.getName().endsWith(".scf")){
+				try {
+					contents = new Scanner(f).useDelimiter("\\Z").next();
+					characters.add(converter.fromJson(contents, new Character(null, 0, 0, 0).getClass()));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}else{
+				System.out.println("Invalid file, could not load: " + f.getAbsolutePath());
+			}
+		}
+		
 		/* Set window configuration */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,11 +88,28 @@ public class MainWindow extends JFrame {
 		tabbedPane.addTab("Select Character", null, selectionTab, null);
 		selectionTab.setLayout(new BorderLayout(0, 0));
 		
-		QuickStatPanel quickInfoPanel = new QuickStatPanel(null);//TODO a proper default value for this
+		/* Display the Logo! */
+		JLabel label;
+		try {
+			BufferedImage img = ImageIO.read(new File("bin/selectCharacter.png"));
+			ImageIcon icon = new ImageIcon(img);
+			label = new JLabel(icon);
+		} catch (IOException e) {
+			e.printStackTrace();
+			label = new JLabel("Missing Logo");
+		}
+		selectionTab.add(label, BorderLayout.NORTH);
+		
+		QuickStatPanel quickInfoPanel;
+		if(characters.size() > 0){
+			quickInfoPanel = new QuickStatPanel(characters.get(0));
+		}else{
+			quickInfoPanel = new QuickStatPanel(null);
+		}
 		selectionTab.add(quickInfoPanel, BorderLayout.WEST);
 		
 		JPanel characterPanel = new JPanel();
-		selectionTab.add(characterPanel, BorderLayout.CENTER);
+		selectionTab.add(characterPanel, BorderLayout.CENTER);//TODO display characters by name and portrait (Toggle Buttons?)
 		
 		JPanel buildTab = new JPanel();
 		tabbedPane.addTab("Build Character", null, buildTab, null);

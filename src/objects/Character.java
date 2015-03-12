@@ -1,5 +1,6 @@
 package objects;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,9 +20,10 @@ import enums.Metatype;
 public class Character {
 	//Non-shadowrun variables
 	File saveLoc;
+	BufferedImage picture;
 	
 	//Personal Data
-	String name, ethnicity, sex, bio, player;
+	String name, ethnicity, sex, bio, player, archtype;
 	Metatype type;
 	Lifestyle StdOfLiving;
 	int nuyen;
@@ -141,6 +143,20 @@ public class Character {
 		if(overrideSaveLocation == null){
 			saveLoc = new File(name + ".json");
 		}
+	}
+	
+	/**
+	 * @return the archtype
+	 */
+	public String getArchtype() {
+		return archtype;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setArchtype(String type) {
+		archtype = type;
 	}
 
 	/**
@@ -750,6 +766,20 @@ public class Character {
 	 */
 	public void setOverflow(int overflow) {
 		this.overflow = overflow;
+	}
+	
+	/**
+	 * @return the picture
+	 */
+	public BufferedImage getPicture(){
+		return picture;
+	}
+	
+	/**
+	 * @param picture the image to set
+	 */
+	public void setPicture(BufferedImage picture){
+		this.picture = picture;
 	}
 
 	/**

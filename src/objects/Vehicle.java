@@ -1,9 +1,13 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 public class Vehicle {
 	int handling, accel, spd, pilot, body, armor, sensor, avail, price;
 	boolean restricted, forbidden;
 	String nam, desc;
+	BufferedImage picture;
+	
 	/** 
 	 * This Constructor makes a vehicle object
 	 * @param name The vehicle's name
@@ -186,6 +190,18 @@ public class Vehicle {
 		this.desc = desc;
 	}
 	
-	//TODO getters and setters
+	/**
+	 * @return the picture
+	 */
+	public BufferedImage getPicture(){
+		return picture;
+	}
+	
+	/**
+	 * @param picture the image to set
+	 */
+	public void setPicture(BufferedImage picture){
+		this.picture = picture;
+	}
 	
 }

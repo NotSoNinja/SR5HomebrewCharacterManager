@@ -33,6 +33,7 @@ import javax.swing.JButton;
 public class Splash extends JFrame {
 	private static final long serialVersionUID = 9146073660186581722L;
 	private JPanel contentPane;
+	private Splash self;
 
 	/**
 	 * Launch the application.
@@ -54,6 +55,7 @@ public class Splash extends JFrame {
 	 * Create the frame.
 	 */
 	public Splash() {
+		self = this;
 		/* Set up the window */
 		this.setTitle("Shadowrun 5 Homebrew Character Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,11 +64,11 @@ public class Splash extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		JLabel label;
 		JButton btnAddSelected = new JButton("Add Selected");
 		JButton btnRemoveSelected = new JButton("Remove Selected");
 
 		/* Display the Logo! */
+		JLabel label;
 		try {
 			BufferedImage img = ImageIO.read(new File("bin/homebrewlogo.png"));
 			ImageIcon icon = new ImageIcon(img);
@@ -208,7 +210,9 @@ public class Splash extends JFrame {
 		btnLaunch.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				self.setVisible(false);
+				MainWindow app = new MainWindow(activatedFiles);
+				app.setVisible(true);
 			}
 		});
 		panel.add(btnLaunch);
