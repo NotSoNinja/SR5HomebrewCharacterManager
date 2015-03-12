@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.imageio.ImageIO;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -31,11 +33,15 @@ import objects.system.QuickStatPanel;
 import objects.system.SR5Archive;
 import objects.Character;
 
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JButton;
+
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 6841497333789115515L;
 	private JPanel contentPane;
 	ArrayList<Character> characters;
 	ArrayList<SR5Archive> archives;
+	JPanel characterPanel;
 
 	/**
 	 * Create the frame.
@@ -108,8 +114,17 @@ public class MainWindow extends JFrame {
 		}
 		selectionTab.add(quickInfoPanel, BorderLayout.WEST);
 		
-		JPanel characterPanel = new JPanel();
-		selectionTab.add(characterPanel, BorderLayout.CENTER);//TODO display characters by name and portrait (Toggle Buttons?)
+		characterPanel = new JPanel();
+		selectionTab.add(characterPanel, BorderLayout.CENTER);
+		characterPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		characterPanel.add(scrollPane);
+		initCharacterSelect();
+		
+		initCharacterSelect();
 		
 		JPanel buildTab = new JPanel();
 		tabbedPane.addTab("Build Character", null, buildTab, null);
@@ -171,8 +186,9 @@ public class MainWindow extends JFrame {
 		mnHelp.add(mntmPreferences);
 	}
 	
-	private void initContentPane(){
-		//TODO copy stuff here
+	private void initCharacterSelect(){
+		//TODO display characters by name and portrait (100x100px) in characterPanel
+		
 	}
 
 }

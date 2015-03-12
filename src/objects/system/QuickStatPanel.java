@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 
 import objects.Character;
 import javax.swing.JSeparator;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 
 public class QuickStatPanel extends JPanel {
 	private static final long serialVersionUID = -1060189945005828759L;
@@ -19,6 +23,7 @@ public class QuickStatPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public QuickStatPanel(Character c) {
+		setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), new BevelBorder(BevelBorder.LOWERED, null, null, null, null)));
 		this.setSize(300,500);
 		setLayout(new MigLayout("", "[][][][][][][][]", "[][][][][][][][][]"));
 		
