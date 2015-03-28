@@ -1,8 +1,9 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -14,21 +15,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JTabbedPane;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
+import objects.system.CharSelectListener;
 import objects.system.QuickStatPanel;
 import objects.system.SR5Archive;
 import objects.Character;
@@ -42,6 +45,7 @@ public class MainWindow extends JFrame {
 	ArrayList<Character> characters;
 	ArrayList<SR5Archive> archives;
 	JPanel characterPanel;
+	QuickStatPanel quickInfoPanel;
 
 	/**
 	 * Create the frame.
@@ -106,7 +110,7 @@ public class MainWindow extends JFrame {
 		}
 		selectionTab.add(label, BorderLayout.NORTH);
 		
-		QuickStatPanel quickInfoPanel;
+		
 		if(characters.size() > 0){
 			quickInfoPanel = new QuickStatPanel(characters.get(0));
 		}else{
@@ -115,14 +119,11 @@ public class MainWindow extends JFrame {
 		selectionTab.add(quickInfoPanel, BorderLayout.WEST);
 		
 		characterPanel = new JPanel();
-		selectionTab.add(characterPanel, BorderLayout.CENTER);
-		characterPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(characterPanel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		characterPanel.add(scrollPane);
-		initCharacterSelect();
+		selectionTab.add(scrollPane);
 		
 		initCharacterSelect();
 		
@@ -176,19 +177,52 @@ public class MainWindow extends JFrame {
 		JMenuItem mntmArchiveManager = new JMenuItem("Archive Manager");
 		mnWindow.add(mntmArchiveManager);
 		
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-		
 		JMenuItem mntmHelp = new JMenuItem("Help");
-		mnHelp.add(mntmHelp);
+		mnWindow.add(mntmHelp);
 		
 		JMenuItem mntmPreferences = new JMenuItem("Preferences");
-		mnHelp.add(mntmPreferences);
+		mnWindow.add(mntmPreferences);
 	}
 	
 	private void initCharacterSelect(){
-		//TODO display characters by name and portrait (100x100px) in characterPanel
+		//TODO display characters by name and portrait (200x200px) in characterPanel
+		characterPanel.setLayout(new GridLayout(0, 6, 10, 10));
 		
+		Dimension size = new Dimension(200,250);
+		JButton btnNewButton = new JButton("New Character");
+		btnNewButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub (New Character)
+			}
+		});
+		btnNewButton.setMinimumSize(size);
+		btnNewButton.setMaximumSize(size);
+		btnNewButton.setPreferredSize(size);
+		characterPanel.add(btnNewButton);
+		JToggleButton btnNewToggleButton;
+		
+		/*Initialize things that will be used every iteration */
+		ArrayList<JToggleButton> makeshiftExclusivity = new ArrayList<JToggleButton>();
+		BufferedImage newImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+		Graphics g = newImage.createGraphics();
+		
+		/* Display already generated Characters for selection */
+		for(Character c : characters){
+			g.drawImage(c.getPicture(), 0, 0, 200, 200, null);
+			ImageIcon icon = new ImageIcon(newImage);
+			btnNewToggleButton = new JToggleButton(c.getName(), icon);
+			makeshiftExclusivity.add(btnNewToggleButton);
+			btnNewToggleButton.setMinimumSize(size);
+			btnNewToggleButton.setMaximumSize(size);
+			btnNewToggleButton.setPreferredSize(size);
+		}
+		g.dispose();
+		int i = 0;
+		for(JToggleButton b : makeshiftExclusivity){
+			b.addActionListener(new CharSelectListener(b, quickInfoPanel, makeshiftExclusivity, characters.get(i)));
+			characterPanel.add(b);
+			i++;
+		}
 	}
 
 }
