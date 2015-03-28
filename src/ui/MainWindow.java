@@ -3,7 +3,6 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -46,6 +45,7 @@ public class MainWindow extends JFrame {
 	ArrayList<SR5Archive> archives;
 	JPanel characterPanel;
 	QuickStatPanel quickInfoPanel;
+	Character selectedCharacter;
 
 	/**
 	 * Create the frame.
@@ -152,6 +152,9 @@ public class MainWindow extends JFrame {
 		
 		JMenuItem mntmCharacterSettings = new JMenuItem("Character Settings");
 		mnCharacter.add(mntmCharacterSettings);
+		
+		JMenuItem mntmAddKarma = new JMenuItem("Add Karma");
+		mnCharacter.add(mntmAddKarma);
 		
 		JMenu mnResources = new JMenu("Resources");
 		menuBar.add(mnResources);
