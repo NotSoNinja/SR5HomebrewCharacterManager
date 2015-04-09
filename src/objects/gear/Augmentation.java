@@ -19,23 +19,34 @@ public class Augmentation extends Gear {
 		essenc = essence;
 		//Something that holds Mods?
 		modArray = new Modification[capacity];
-		if(!checkModifications()){
-			//return Over Modifactation Limit
-		}
 	}
 	
 	//Methods
 	private boolean checkModifications(){
-		int total = 0;
-		for(Modification i:modArray){
-			total += i.getModSize();
-		}
-		if(total>cap){
+		if(modCapacityTotal()>cap){
 			return false;
 		}
 		else{
 			return true;
 		}
+	}
+	public int modCapacityTotal(){
+		int modTotal = 0;
+		for(Modification i:modArray){
+			modTotal += i.getModSize();
+		}
+		return modTotal;
+	}
+		validAug = checkModifications();
+		String out;
+		if(validAug){
+			out = "Augmentation accepted. ";
+		}
+		else{
+			out = "Augmentation denied (modifications exceed Augmentation capacity).";
+		}
+		out += "Modification Total: " + modCapacityTotal() + " out of " + getCap();
+		return out;
 	}
 	//Getters and Setters
 	public Modification[] getModArray() {
@@ -61,7 +72,8 @@ public class Augmentation extends Gear {
 	public void setEssenc(float essenc) {
 		this.essenc = essenc;
 	}
-
-
-
+	
+	public boolean getValidAug(){
+		return validAug;
+	}
 }
