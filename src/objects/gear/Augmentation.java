@@ -1,27 +1,48 @@
-package src.objects.gear;
+/*
+ * Author: NotSoNinja & jpmesser
+ * Purpose: Holds data required for Cyberwear/Biowear Augmentations to a character
+ * Bugs: none
+ * Plans: Body parts into total body (a class above). Plug strings out into the Creator. 
+ */
+package objects.gear;
+
+import enums.Augments;
 
 public class Augmentation extends Gear {
+	//Stores the capacity of the Augment
 	int cap;
+	//Stores the req
 	float essenc;
-	//Something that holds Mods?
+	//Stores the state of the Augmentation (working or not)
+	boolean validAug;
+	//Stores the Modifications located in the Augmentation
 	Modification modArray[];
-
-	public Augmentation(String namestr, int rating, float essence, int capacity, int availability, boolean r, boolean f, int price, String description,Modification modArrayIn[]) {
+	//Stores the augmentation grade
+	AugGrade grade;
+	//Stores the body part the augment is located in
+	Body location;
+	
+	public Augmentation(String namestr, int rating, float essence, int capacity, int availability, boolean r, boolean f, int price, String description,Modification modArrayIn[],AugGrade gradeIn,Body locIn) {
 		super(namestr, rating, availability, r, f, price, description);
 		cap = capacity;
 		essenc = essence;
-		//Something that holds Mods?
 		modArray = modArrayIn;
+		grade = gradeIn;
+		location = locIn;
+		validateAug();
 	}
-	public Augmentation(String namestr, int rating, float essence, int capacity, int availability, boolean r, boolean f, int price, String description) {
+	public Augmentation(String namestr, int rating, float essence, int capacity, int availability, boolean r, boolean f, int price, String description,AugGrade gradeIn, Body locIn) {
 		super(namestr, rating, availability, r, f, price, description);
 		cap = capacity;
 		essenc = essence;
-		//Something that holds Mods?
+		grade = gradeIn;
+		location = locIn;
 		modArray = new Modification[capacity];
+		validateAug();
 	}
 	
 	//Methods
+	//Checks if the Modifications contained in modArray exceed the Capacity for the Augment
 	private boolean checkModifications(){
 		if(modCapacityTotal()>cap){
 			return false;
@@ -30,6 +51,7 @@ public class Augmentation extends Gear {
 			return true;
 		}
 	}
+	//Sums the required capacity of each of the Modifications contained in modArray and returns the total
 	public int modCapacityTotal(){
 		int modTotal = 0;
 		for(Modification i:modArray){
@@ -37,6 +59,8 @@ public class Augmentation extends Gear {
 		}
 		return modTotal;
 	}
+	//Checks to see if the Augment is valid and returns a String. As part of validation validAug will be set
+	public String validateAug(){
 		validAug = checkModifications();
 		String out;
 		if(validAug){
@@ -73,6 +97,18 @@ public class Augmentation extends Gear {
 		this.essenc = essenc;
 	}
 	
+	public AugGrade getGrade() {
+		return grade;
+	}
+	public void setGrade(AugGrade grade) {
+		this.grade = grade;
+	}
+	public Body getLocation() {
+		return location;
+	}
+	public void setLocation(Body location) {
+		this.location = location;
+	}
 	public boolean getValidAug(){
 		return validAug;
 	}
