@@ -46,6 +46,7 @@ public class MainWindow extends JFrame {
 	JPanel characterPanel;
 	QuickStatPanel quickInfoPanel;
 	Character selectedCharacter;
+	public int length = 25; //I forgot what a reasonable default for this is...
 
 	/**
 	 * Create the frame.
@@ -187,15 +188,21 @@ public class MainWindow extends JFrame {
 		mnWindow.add(mntmPreferences);
 	}
 	
+	/**
+	 * Displays the characters on the select screen :P
+	 */
 	private void initCharacterSelect(){
-		//TODO display characters by name and portrait (200x200px) in characterPanel
 		characterPanel.setLayout(new GridLayout(0, 6, 10, 10));
-		
+		MainWindow parent = this;
 		Dimension size = new Dimension(200,250);
 		JButton btnNewButton = new JButton("New Character");
 		btnNewButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub (New Character)
+				NewCharacterDialog d = new NewCharacterDialog();
+				d.setVisible(true);
+				if(d.getSave()){
+					characters.add(new Character(d.getPlayer(), d.getKarma(), d.getEssence(), parent.length, d.getName()));
+				}
 			}
 		});
 		btnNewButton.setMinimumSize(size);
