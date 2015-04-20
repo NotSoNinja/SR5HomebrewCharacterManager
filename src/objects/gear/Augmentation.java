@@ -1,7 +1,7 @@
 /*
  * Author: NotSoNinja & jpmesser
  * Purpose: Holds data required for Cyberwear/Biowear Augmentations to a character
- * Bugs: none
+ * Bugs: not syncing
  * Plans: Body parts into total body (a class above). Plug strings out into the Creator. 
  */
 package objects.gear;
