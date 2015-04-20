@@ -1,7 +1,7 @@
 /*
  * Author: jpmesser
  * Purpose: Holds data required for a Modification to a Augmentation
- * Bugs: none   
+ * Bugs: not syncing   
  */
 package objects.gear;
 

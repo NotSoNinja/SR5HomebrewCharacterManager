@@ -1,7 +1,7 @@
 /*
  * Author: jpmesser
  * Purpose: Makes the effected Attribute easier for the program to find and modify (as part of Augmentation Modifications)
- * Bugs: none   
+ * Bugs: not syncing   
  */
 package src.enums.Augments;
 
