@@ -6,7 +6,7 @@
  */
 package objects.gear;
 
-import enums.Augments;
+import enums.Augments.*;
 
 public class Augmentation extends Gear {
 	//Stores the capacity of the Augment
@@ -97,7 +97,7 @@ public class Augmentation extends Gear {
 		this.essenc = essenc;
 	}
 	
-	public AugGrade getGrade() {
+	public AugGrade getAugGrade() {
 		return grade;
 	}
 	public void setGrade(AugGrade grade) {
