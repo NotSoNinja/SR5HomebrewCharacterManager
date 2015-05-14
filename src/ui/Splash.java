@@ -70,7 +70,7 @@ public class Splash extends JFrame {
 		/* Display the Logo! */
 		JLabel label;
 		try {
-			BufferedImage img = ImageIO.read(new File("bin/homebrewlogo.png"));
+			BufferedImage img = ImageIO.read(new File("Data/homebrewlogo.png"));
 			ImageIcon icon = new ImageIcon(img);
 			label = new JLabel(icon);
 		} catch (IOException e) {

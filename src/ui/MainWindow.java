@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
@@ -46,7 +47,10 @@ public class MainWindow extends JFrame {
 	JPanel characterPanel;
 	QuickStatPanel quickInfoPanel;
 	Character selectedCharacter;
+	ArrayList<JToggleButton> makeshiftExclusivity;
 	public int length = 25; //I forgot what a reasonable default for this is...
+	JPanel buildTab, selectionTab, gearTab, charSheet;
+	JTabbedPane tabbedPane;
 
 	/**
 	 * Create the frame.
@@ -92,17 +96,17 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		/* Set up the Character Select Tab */
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 		
-		JPanel selectionTab = new JPanel();
+		selectionTab = new JPanel();
 		tabbedPane.addTab("Select Character", null, selectionTab, null);
 		selectionTab.setLayout(new BorderLayout(0, 0));
 		
 		/* Display the Logo! */
 		JLabel label;
 		try {
-			BufferedImage img = ImageIO.read(new File("bin/selectCharacter.png"));
+			BufferedImage img = ImageIO.read(new File("Data/selectCharacter.png"));
 			ImageIcon icon = new ImageIcon(img);
 			label = new JLabel(icon);
 		} catch (IOException e) {
@@ -128,13 +132,13 @@ public class MainWindow extends JFrame {
 		
 		initCharacterSelect();
 		
-		JPanel buildTab = new JPanel();
+		buildTab = new JPanel();
 		tabbedPane.addTab("Build Character", null, buildTab, null);
 		
-		JPanel gearTab = new JPanel();
+		gearTab = new JPanel();
 		tabbedPane.addTab("Gear and Powers", null, gearTab, null);
 		
-		JPanel charSheet = new JPanel();
+		charSheet = new JPanel();
 		tabbedPane.addTab("Character Sheet", null, charSheet, null);
 	}
 	
@@ -198,11 +202,8 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton = new JButton("New Character");
 		btnNewButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				NewCharacterDialog d = new NewCharacterDialog();
+				NewCharacterDialog d = new NewCharacterDialog(parent);
 				d.setVisible(true);
-				if(d.getSave()){
-					characters.add(new Character(d.getPlayer(), d.getKarma(), d.getEssence(), parent.length, d.getName()));
-				}
 			}
 		});
 		btnNewButton.setMinimumSize(size);
@@ -212,7 +213,7 @@ public class MainWindow extends JFrame {
 		JToggleButton btnNewToggleButton;
 		
 		/*Initialize things that will be used every iteration */
-		ArrayList<JToggleButton> makeshiftExclusivity = new ArrayList<JToggleButton>();
+		makeshiftExclusivity = new ArrayList<JToggleButton>();
 		BufferedImage newImage = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
 		Graphics g = newImage.createGraphics();
 		
@@ -234,5 +235,34 @@ public class MainWindow extends JFrame {
 			i++;
 		}
 	}
+	
+	public void setSelectedCharacter(Character c){
+		selectedCharacter = c;
+	}
 
+	/**
+	 * This method adds a character from a user dialog
+	 * @param d The NewCharacterDialog to take parameters from
+	 */
+	public void addCharacter(NewCharacterDialog d){
+		if((d.getPlayer() != null) && (d.getKarma() >= 0) && (d.getEssence() >= 0) && (d.getName() != null)){
+			Character tempc = new Character(d.getPlayer(), d.getKarma(), d.getEssence(), this.length, d.getName());
+			tempc.setDescription(d.getDescription());
+			characters.add(tempc);
+			Dimension size = new Dimension(200,250);
+			JToggleButton btnNewToggleButton = new JToggleButton(tempc.getName());
+			makeshiftExclusivity.add(btnNewToggleButton);
+			btnNewToggleButton.setMinimumSize(size);
+			btnNewToggleButton.setMaximumSize(size);
+			btnNewToggleButton.setPreferredSize(size);
+			btnNewToggleButton.addActionListener(new CharSelectListener(btnNewToggleButton, quickInfoPanel, makeshiftExclusivity, tempc));
+			characterPanel.add(btnNewToggleButton);
+			btnNewToggleButton.setVisible(true);
+			setSelectedCharacter(tempc);
+			btnNewToggleButton.setSelected(true);
+			tabbedPane.setSelectedComponent(buildTab);
+		}else{
+			JOptionPane.showMessageDialog(this, "Failed to create character: Invalid input", "Alert", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
 }

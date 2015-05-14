@@ -22,17 +22,20 @@ public class NewCharacterDialog extends JDialog {
 	private static final long serialVersionUID = -3233060217088872784L;
 	int karma, essence;
 	String name, player, desc;
-	boolean save = false;
+	NewCharacterDialog parent = this;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private NewCharacterDialog d;
+	private JEditorPane editorPane;
 
 	/**
 	 * Create the dialog.
 	 */
-	public NewCharacterDialog() {
+	public NewCharacterDialog(MainWindow parent) {
+		d = this;
 		setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
@@ -85,7 +88,7 @@ public class NewCharacterDialog extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane, "cell 1 4 1 4,grow");
 			{
-				JEditorPane editorPane = new JEditorPane();
+				editorPane = new JEditorPane();
 				editorPane.setToolTipText("");
 				scrollPane.setViewportView(editorPane);
 			}
@@ -99,7 +102,13 @@ public class NewCharacterDialog extends JDialog {
 				okButton.addActionListener(new ActionListener(){
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						save = true;
+						karma = Integer.parseInt(textField.getText());
+						essence = Integer.parseInt(textField_3.getText());
+						name = textField_1.getText();
+						player = textField_2.getText();
+						desc = editorPane.getText();
+						d.setVisible(false);
+						parent.addCharacter(d);
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -108,6 +117,12 @@ public class NewCharacterDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener(){
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						d.setVisible(false);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -128,9 +143,6 @@ public class NewCharacterDialog extends JDialog {
 	}
 	public String getDescription(){
 		return desc;
-	}
-	public boolean getSave(){
-		return save;
 	}
 
 }

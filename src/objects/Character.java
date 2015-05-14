@@ -23,7 +23,7 @@ public class Character {
 	BufferedImage picture;
 	
 	//Personal Data
-	String name, ethnicity, sex, bio, player, archtype;
+	String name, ethnicity, sex, bio, player, archtype, desc;
 	Metatype type;
 	Lifestyle StdOfLiving;
 	int nuyen;
@@ -239,6 +239,7 @@ public class Character {
 			return "U MAD BRO?";
 		case OTHER :
 			return "Custon Race";
+		default :
 		}
 		return "You should never see this.  Ever.";
 	}
@@ -780,6 +781,20 @@ public class Character {
 	 */
 	public void setPicture(BufferedImage picture){
 		this.picture = picture;
+	}
+	
+	/**
+	 * @param s The description to set
+	 */
+	public void setDescription(String s){
+		desc = s;
+	}
+	
+	/**
+	 * @return the description
+	 */
+	public String getDescription(){
+		return desc;
 	}
 
 	/**
