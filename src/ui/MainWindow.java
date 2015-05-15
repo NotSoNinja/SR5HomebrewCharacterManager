@@ -32,12 +32,16 @@ import javax.swing.JTabbedPane;
 import com.google.gson.Gson;
 
 import objects.system.CharSelectListener;
+import objects.system.PriorityTablePanel;
 import objects.system.QuickStatPanel;
 import objects.system.SR5Archive;
 import objects.Character;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 6841497333789115515L;
@@ -51,6 +55,7 @@ public class MainWindow extends JFrame {
 	public int length = 25; //I forgot what a reasonable default for this is...
 	JPanel buildTab, selectionTab, gearTab, charSheet;
 	JTabbedPane tabbedPane;
+	private JTextField txtDefaultname;
 
 	/**
 	 * Create the frame.
@@ -134,6 +139,43 @@ public class MainWindow extends JFrame {
 		
 		buildTab = new JPanel();
 		tabbedPane.addTab("Build Character", null, buildTab, null);
+		buildTab.setLayout(new MigLayout("", "[482px]", "[368px]"));
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		buildTab.add(tabbedPane_1, "cell 0 0,grow");
+		
+		JPanel panel = new JPanel();
+		tabbedPane_1.addTab("Race, Attributes, etc.", null, panel, null);
+		panel.setLayout(new MigLayout("", "[477px,grow][grow]", "[340px,grow][grow]"));
+		PriorityTablePanel priorityTablePanel = new PriorityTablePanel();
+		panel.add(priorityTablePanel, "cell 0 0,alignx left,aligny top");
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, "cell 1 0 1 2,grow");
+		panel_1.setLayout(new MigLayout("", "[][grow][grow][]", "[][][][][][][][][][][][][]"));
+		
+		JLabel lblName = new JLabel("Name: ");
+		panel_1.add(lblName, "cell 0 0,alignx trailing");
+		
+		txtDefaultname = new JTextField();
+		txtDefaultname.setText("DEFAULT_NAME");
+		panel_1.add(txtDefaultname, "cell 1 0 3 1,growx");
+		txtDefaultname.setColumns(10);
+		
+		JLabel lblRace = new JLabel("Race:");
+		panel_1.add(lblRace, "cell 0 1,alignx trailing");
+		
+		JComboBox comboBox = new JComboBox();
+		panel_1.add(comboBox, "cell 1 1 3 1,growx");
+		
+		JButton btnSave = new JButton("Save");
+		panel_1.add(btnSave, "cell 0 12 4 1,grow");
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2, "cell 0 1,grow");
+		
+		JLabel lblAttributesGoHere = new JLabel("Attributes Go Here");
+		panel_2.add(lblAttributesGoHere);
 		
 		gearTab = new JPanel();
 		tabbedPane.addTab("Gear and Powers", null, gearTab, null);
